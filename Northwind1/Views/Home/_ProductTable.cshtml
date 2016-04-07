@@ -1,0 +1,46 @@
+﻿<table>
+    <!-- Table Header -->
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Product Name</th>
+            <th>Quantity per Unit</th>
+            <th>Unit Price</th>
+            <th>Units in Stock</th>
+            <th>Units on Order</th>
+            <th>Reorder Level</th>
+            <th><!-- Discontinued column --></th>
+        </tr>
+    </thead>
+
+
+    <!-- Table Data -->
+    <tbody>
+        @foreach (var p in ViewBag.productList)
+        {
+            <tr>
+                <td>@p.ProductID</td>
+
+                <!-- Product Names will link to details about that product -->
+                <td>@Html.ActionLink((string)p.ProductName, "ProductDetails", new { id = p.ProductID }, null)</td>
+
+                <td>@p.QuantityPerUnit</td>
+                <td>@p.UnitPrice</td>
+                <td>@p.UnitsInStock</td>
+                <td>@p.UnitsOnOrder</td>
+                <td>@p.ReorderLevel</td>
+
+                @if (p.Discontinued == "TRUE")
+                {
+                    <td>Discontinued</td>
+                }
+                else
+                {
+                    <td><!-- Not discontinued --></td>
+                }
+                
+            </tr>
+        }
+    </tbody>
+</table>
+

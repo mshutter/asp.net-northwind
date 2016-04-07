@@ -1,0 +1,58 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>DisplayInterfaceTest</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Display Interface Testing (TableRow)</h2>
+
+        <a href="/Home">Back to main application</a>
+
+        <h3>Select a model to see the strategy pattern in action:</h3>
+        <ul>
+            <li><a href="/Home/DisplayInterfaceTest?model=Product">Products</a></li>
+            <li><a href="/Home/DisplayInterfaceTest?model=Supplier">Suppliers</a></li>
+            <li><a href="/Home/DisplayInterfaceTest?model=Category">Categories</a></li>
+            <li><a href="/Home/DisplayInterfaceTest?model=Order">Orders</a></li>
+            <li><a href="/Home/DisplayInterfaceTest?model=OrderDetail">Order Details</a></li>
+        </ul>
+        
+        
+        <table>
+            <thead>
+                <tr>
+
+                <!-- Print table header from attribute list -->
+                @foreach (var attr in ViewBag.attrList)
+                {
+                    <th>
+                        @attr
+                    </th>
+                }
+
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <!-- Print table body from each item's ToString() method -->
+                @foreach (var item in ViewBag.dataList)
+                {
+                    @Html.Raw(item)
+                }
+
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

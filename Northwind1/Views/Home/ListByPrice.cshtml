@@ -1,0 +1,104 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ListByPrice</title>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link href="~/global.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div class="col-xs-12">
+            <h1>Browsing By Price</h1>
+            <p>
+                Input the price of products you'd like to view below.
+            </p>
+
+
+            <nav id="breadcrumb">
+                <span><a href="/Home">Products</a></span>
+                <span>&gt;</span>
+                <span><a href="/Home/ListBySupplier">Price</a></span>
+            </nav>
+        </div>
+
+        <div class="col-md-3">
+            <!-- "Filter" Navigation -->
+            @Html.Partial("~/views/home/_mainNav.cshtml")
+
+
+            <!-- Supplier Navigation -->
+            <h4>Price Range (@ViewBag.productList.Count)</h4>
+
+            <div id="err" style="color:red;">
+                <!-- If there is a validation error, it will appear here -->
+            </div>
+
+
+            <form id="minMaxForm" action="/Home/ListByPrice" method="GET" onsubmit="return validateMinMax()" style="padding-left:30px;">
+                <!-- If request contains value for min or max, input fields will be populated accordingly -->
+                <div class="form-group">
+                    <label>From</label>
+                    <br />
+                    <input type="text" name="min" value="@ViewBag.min" placeholder="Minimum price" />
+                </div>
+                
+                <div class="form-group">
+                    <label>To</label>
+                    <br />
+                    <input type="text" name="max" value="@ViewBag.max" placeholder="Maximum price" />
+                </div>
+                <input class="form-group" type="submit" value="submit" />
+            </form>
+        </div>
+
+
+        <!-- Form validation script -->
+        <script>
+            function validateMinMax() {
+
+                // Get form DOM element and min max values
+                var form = document.getElementById("minMaxForm");
+                var min = form.min.value;
+                var max = form.max.value;
+
+                // If either min or max is negative or not a number...
+                if ( ( parseFloat(min) < 0 ) || ( parseFloat(max) < 0 ) || ( min != parseFloat(min) && min !== "" ) || ( max != parseFloat(max) && max !== "" ) ) {
+
+                    // display error message...
+                    document.getElementById("err").innerHTML = "Error, search criteria must only consist of positive numeric values.";
+
+                    // and hault form submission.
+                    return false;
+                }
+                
+                // If both min and max are set, but min is greater than max...
+                else if ( min != "" && max != "" && parseFloat(min) > parseFloat(max) ) {
+
+                    // display error message...
+                    document.getElementById("err").innerHTML = "Error, maximum price value must be greater than the minimum price value.";
+
+                    // and hault form submission.
+                    return false;
+                }
+
+                // Inputs are valid and form will submit.
+                return true;
+            }
+        </script>
+
+        <div class="col-md-9">
+            <!-- Render table from products in ViewBag.productList -->
+            @Html.Partial("~/views/home/_producttable.cshtml")
+        </div>
+    </div>
+</body>
+</html>

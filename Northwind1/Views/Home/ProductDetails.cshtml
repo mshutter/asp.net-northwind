@@ -1,0 +1,80 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Product</title>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link href="~/global.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <h1 class="col-md-12">Product Details</h1>
+        <p class="col-md-12">
+            Showing details for: <strong>@ViewBag.product.ProductName</strong>
+        </p>
+
+        <!-- Breadcrumb Navigation -->
+        <nav class="col-xs-12" id="breadcrumb">
+            <span><a href="/Home">Products</a></span>
+            <span>&gt;</span>
+            <span><a href="/Home/ProductDetails/@ViewBag.product.ProductID">@ViewBag.product.ProductName</a></span>
+        </nav>
+
+        <div class="col-md-3">
+            @Html.Partial("~/views/home/_mainNav.cshtml")
+            <!-- "Filter" Navigation -->
+        </div>
+
+        
+        <div class="col-md-9">
+            <label>Product ID:</label>
+            @ViewBag.product.ProductID
+            <br />
+
+            <label>Product Name:</label>
+            @ViewBag.product.ProductName
+            <br />
+
+            <label>Supplier:</label>
+            @ViewBag.supplierName
+            <br />
+
+            <label>Category:</label>
+            @ViewBag.categoryName
+            <br />
+
+            <label>Quantity Per Unit:</label>
+            @ViewBag.product.QuantityPerUnit
+            <br />
+
+            <label>Unit Price:</label>
+            @ViewBag.product.UnitPrice
+            <br />
+
+            <label>Units in Stock:</label>
+            @ViewBag.product.UnitsInStock
+            <br />
+        
+            <label>Units on Order:</label>
+            @ViewBag.product.UnitsOnOrder
+            <br />
+
+            <label>Reorder Level:</label>
+            @ViewBag.product.ReorderLevel
+            <br />
+
+            <label>Discontinued:</label>
+            @ViewBag.product.Discontinued
+            <br />
+        </div>
+    </div>
+</body>
+</html>

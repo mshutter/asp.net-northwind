@@ -1,0 +1,67 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ListBySupplier</title>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link href="~/global.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div class="col-xs-12">
+            <h1>Browsing By Supplier</h1>
+            <p>
+                Select a supplier from the list below to refine your search.
+            </p>
+
+
+            <nav id="breadcrumb">
+                <span><a href="/Home">Products</a></span>
+                <span>&gt;</span>
+                <span><a href="/Home/ListBySupplier">Suppliers</a></span>
+
+                <!-- If a category selection has been made, append that to the bread crumb -->
+                @if (ViewBag.supplierSelection.SupplierID != -1)
+                {
+                    <span>&gt;</span>
+                    <span>
+                        @Html.ActionLink(
+                            (string)ViewBag.supplierSelection.CompanyName,
+                            "ListBySupplier",
+                            new { id = ViewBag.supplierSelection.SupplierID },
+                            null)
+                    </span>
+                }
+            </nav>
+        </div>
+
+        <div class="col-md-3">
+            <!-- "Filter" Navigation -->
+            @Html.Partial("~/views/home/_mainNav.cshtml")
+
+
+            <!-- Supplier Navigation -->
+            <h4>Suppliers</h4>
+            <ul>
+                @foreach (var s in ViewBag.supplierList)
+                {
+                    <li>@Html.ActionLink((string)s.CompanyName, "ListBySupplier", new { id = s.SupplierID }, null)</li>
+                }
+            </ul>
+        </div>
+
+
+        <!-- Render table from products in ViewBag.productList -->
+        <div class="col-md-9">
+            @Html.Partial("~/views/home/_producttable.cshtml")
+        </div>
+    </div>
+</body>
+</html>

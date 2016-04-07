@@ -1,0 +1,30 @@
+﻿
+<table>
+    <!-- Table Header -->
+    <thead>
+        <tr>
+            <th></th>
+            <th>Order Date</th>
+            <th>Name</th>
+            <th>City</th>
+            <th>Country</th>
+            <th>Postal Code</th>
+        </tr>
+    </thead>
+
+
+    <!-- Table Data -->
+    @foreach (var o in ViewBag.orderList)
+    {
+        
+        <tr>
+            <td><a href="/Home/Orders/@o.OrderID">&num;@o.OrderID</a></td>
+            <td>@o.OrderDate</td>
+            <td>@o.ShipName</td>
+            <td>@o.ShipCity</td>
+            <td>@o.ShipCountry</td>
+            <td>@o.ShipPostalCode</td>
+        </tr>
+        
+    }
+</table>
